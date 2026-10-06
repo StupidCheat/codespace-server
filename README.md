@@ -1,71 +1,59 @@
 # Servidor HTTP Accesible desde Internet en GitHub Codespace
 
-Servidor HTTP sencillo ejecutándose en un GitHub Codespace, accesible desde cualquier dispositivo con internet.
+Servidor HTTP que se inicia automáticamente cuando entras al Codespace. El puerto 8000 se configura automáticamente como público y recibes la URL completa para acceder desde internet.
 
-## Requisitos
+## Inicio automático
 
-- GitHub Codespace activo
-- Python 3.7+
-- GitHub CLI (gh) preinstalado en el Codespace
+Al abrir el Codespace:
+1. El servidor se inicia automáticamente
+2. El puerto 8000 se hace público
+3. Recibes la URL pública en el terminal
 
-## Inicio rápido
+## Manual: Iniciar con comando
 
-### 1. Iniciar el servidor
+```bash
+bash start_server.sh
+```
+
+O directamente:
 
 ```bash
 python server.py
 ```
 
-### 2. Hacer el puerto público
+## URLs
 
-```bash
-gh codespace ports visibility 8000:public
+### Local
+```
+http://localhost:8000
 ```
 
-### 3. Obtener la URL pública
-
-```bash
-echo "https://${CODESPACE_NAME}-8000.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
+### Pública
+```
+https://${CODESPACE_NAME}-8000.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}
 ```
 
 ## Pruebas
 
 ### Local
-
 ```bash
 curl http://localhost:8000/
 ```
 
-Respuesta esperada:
-
-```text
-Servidor funcionando
-```
-
 ### Desde otro dispositivo
-
 ```bash
 curl https://${CODESPACE_NAME}-8000.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}/
 ```
 
-## Estructura
-
-```text
-codespace-server/
-├── server.py
-├── start_server.sh
-├── COMANDOS.md
-├── README.md
-├── .devcontainer/
-│   └── devcontainer.json
-├── .gitignore
-└── .gitmodules
+Respuesta esperada:
+```
+Servidor funcionando
 ```
 
-## Comandos útiles
+## Archivos
 
-```bash
-python server.py
-gh codespace ports visibility 8000:public
-echo "https://${CODESPACE_NAME}-8000.${GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}"
-```
+- `server.py` - Servidor HTTP Python
+- `start_server.sh` - Arranca el servidor, hace público el puerto 8000 y muestra URL
+- `.devcontainer/devcontainer.json` - Configuración del port forwarding
+- `README.md` - Documentación del proyecto
+- `init.sh` - Script de inicio del Codespace

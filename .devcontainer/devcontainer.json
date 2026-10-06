@@ -11,6 +11,6 @@
       "onAutoForward": "notify"
     }
   },
-  "postCreateCommand": "pip install --upgrade pip",
+  "postCreateCommand": "chmod +x start_server.sh && pip install --upgrade pip",
   "remoteUser": "codespace"
 }
